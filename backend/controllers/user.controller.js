@@ -53,14 +53,18 @@ export const login = async (req, res) => {
 
     // create JWT token
 
-    let token =jwt.sign(
-      { user_id: user.id, email },
-      "jwt__secret",
-      function (err, token) {
-        if (err) throw err;
-        console.log(token);
-      }
-    );
+    // let token =jwt.sign(
+    //   { user_id: user.id, email },
+    //   "jwt__secret",
+    //   function (err, token) {
+    //     if (err) throw err;
+    //     console.log(token);
+    //   }
+    // );
+    const token = jwt.sign({ id: user.id, email }, "JWT_SECRETE_KEY", {
+      expiresIn: "30d",
+    });
+    console.log("token::::",token)
     const { password, ...other } = result[0];
     res
       .cookie("access_token", token, {
