@@ -17,12 +17,13 @@ const Single = () => {
 
   const postId = location.pathname.split("/")[2];
 
+  console.log("location.pathname:::", location.pathname.split('/')[2]);
   //   const { currentUser } = useContext(AuthContext);
   let currentUser = "ali";
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/posts/${postId}`);
+        const res = await axios.get(`/posts/getSinglePost/${postId}`);
         setPost(res.data);
       } catch (err) {
         console.log(err);
@@ -48,7 +49,7 @@ const Single = () => {
   return (
     <div className="single">
       <div className="content">
-        <img src={`../upload/${post?.img}`} alt="" />
+        <img src={post?.img||`../upload/${post?.img}`} alt="" />
         <div className="user">
           {post.userImg && <img src={post.userImg} alt="" />}
           <div className="info">
